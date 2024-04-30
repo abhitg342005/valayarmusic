@@ -35,7 +35,7 @@ This is a light weight source, as a result it gives faster and better performanc
 - Fork & Star this repo.
 ------
 
-[![Deploy+On+Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/sakhaavvaavaj93/StenzleMusic/tree/Master)
+[![Deploy+On+Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/abhitg342005/valayarmusic/tree/Master)
 ## 🚀 Deploy Locally
 
 `Tutorial coming soon.`
