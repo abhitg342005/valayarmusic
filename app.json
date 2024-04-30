@@ -1,5 +1,5 @@
 {
-    "name": "Stenzle",
+    "name": "Valayar MusicBot",
     "description": "A VC Player Bot for telegram videochats, written in Python with Pyrogram and Py-Tgcalls.",
     "logo": "https://graph.org/file/26fb6a3ccf7f40e28bd61.jpg",
     "keywords": [
@@ -13,37 +13,37 @@
     "env": {
       "API_ID": {
         "description": "Get this value from https://my.telegram.org",
-        "value": "1621962",
+        "value": "",
         "required": true
       },
       "API_HASH": {
         "description": "Get this value from https://my.telegram.org",
-        "value": "6f019552c1cf83dec1851516b1bb099c",
+        "value": "",
         "required": true
       },
       "BOT_TOKEN": {
         "description": "A Bot's token from Botfather",
-        "value": "7177110300:AAFIspUhGBYpOmOM1MI0DRJ4MipN1gZHcUQ",
+        "value": "",
         "required": true
       },
       "OWNER_ID": {
         "description": "Fill your user id here. (Must be integer)",
-        "value": "7044382449",
+        "value": "",
         "required": true
       },
       "SESSION": {
         "description": "A pyrogram v2 string session from @StringFatherBot",
-        "value": "BQAYv8oAw4WfreQ9ZmAYN2WKEsbheJtXaGtyCFnWxbCZ2UXtZrjS5aLeo8O-hDWhuZlVP_6cfJ5p7ML4F4ORjO3_oV8g8TqCPeJGU2FT_qPOUpJRIuSVmstmMvw6bXqJWSayO1VYFVJWbu27oC8sx1C2-rGVW4AG1dwsi6dEb2IkYcqgZyMR4n1z-DCvHkZ_OgbJODqETnMxGdq7ZG7GBIkLmtNx-cjIXQSRtutg89uVLZgqzn2qR2QAeRdTJt6hrPBTCUOU2IMj75prdGCMWngw9sk2dCZ9HU_1CbBZ10m-cB467T6UJgMlkashgCqrZhhngS0Z5EMW15xhlP_J2vQRxOqnpgAAAAGmimwcAA",
+        "value": "",
         "required": true
       },
       "SUDO_USERS": {
         "description": "The user id(s) of user(s) whom you would like to add as a sudo. Multiple values shall be seperated with a space.",
-        "value": "7044382449 7089056796 7091240816 5503730873 5660824579",
+        "value": "6627630052 6863173634",
         "required": true
       },
       "SUPPORT_CHAT": {
         "description": "Link of your telegram support group. (Must pe public)",
-        "value": "https://t.me/Mallus_Street",
+        "value": "",
         "required": false
       }
     },
