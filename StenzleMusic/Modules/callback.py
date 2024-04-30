@@ -81,48 +81,27 @@ async def admin_cbs(_, query: CallbackQuery):
             )
         await stream_on(query.message.chat.id)
         await pytgcalls.resume_stream(query.message.chat.id)
-        await query.message.reply_text(
-            text=f"➻ sᴛʀᴇᴀᴍ ʀᴇsᴜᴍᴇᴅ 💫\n│ \n└ʙʏ : {query.from_user.mention} 🥀",
-            reply_markup=close_key,
-        )
-
+       
     elif data == "pause_cb":
         if not await is_streaming(query.message.chat.id):
             return await query.answer(
                 "ᴅɪᴅ ʏᴏᴜ ʀᴇᴍᴇᴍʙᴇʀ ᴛʜᴀᴛ ʏᴏᴜ ʀᴇsᴜᴍᴇᴅ ᴛʜᴇ sᴛʀᴇᴀᴍ ?", show_alert=True
             )
+            await query.delete()
         await stream_off(query.message.chat.id)
         await pytgcalls.pause_stream(query.message.chat.id)
-        await query.message.reply_text(
-            text=f"➻ sᴛʀᴇᴀᴍ ᴩᴀᴜsᴇᴅ 🥺\n│ \n└ʙʏ : {query.from_user.mention} 🥀",
-            reply_markup=close_key,
-        )
-
+        
     elif data == "end_cb":
         try:
             await _clear_(query.message.chat.id)
             await pytgcalls.leave_group_call(query.message.chat.id)
-        except:
-            pass
-        await query.message.reply_text(
-            text=f"➻ sᴛʀᴇᴀᴍ ᴇɴᴅᴇᴅ/sᴛᴏᴩᴩᴇᴅ ❄\n│ \n└ʙʏ : {query.from_user.mention} 🥀",
-            reply_markup=close_key,
-        )
-        await query.message.delete()
-
+            
     elif data == "skip_cb":
         get = Stenzledb.get(query.message.chat.id)
         if not get:
             try:
                 await _clear_(query.message.chat.id)
                 await pytgcalls.leave_group_call(query.message.chat.id)
-                await query.message.reply_text(
-                    text=f"➻ sᴛʀᴇᴀᴍ sᴋɪᴩᴩᴇᴅ 🥺\n│ \n└ʙʏ : {query.from_user.mention} 🥀\n\n**» ɴᴏ ᴍᴏʀᴇ ǫᴜᴇᴜᴇᴅ ᴛʀᴀᴄᴋs ɪɴ** {query.message.chat.title}, **ʟᴇᴀᴠɪɴɢ ᴠɪᴅᴇᴏᴄʜᴀᴛ.**",
-                    reply_markup=close_key,
-                )
-                return await query.message.delete()
-            except:
-                return
         else:
             title = get[0]["title"]
             duration = get[0]["duration"]
@@ -142,18 +121,6 @@ async def admin_cbs(_, query: CallbackQuery):
                 LOGGER.error(ex)
                 await _clear_(query.message.chat.id)
                 return await pytgcalls.leave_group_call(query.message.chat.id)
-
-            img = await gen_thumb(videoid, user_id)
-            await query.edit_message_text(
-                text=f"➻ sᴛʀᴇᴀᴍ sᴋɪᴩᴩᴇᴅ 🥺\n│ \n└ʙʏ : {query.from_user.mention} 🥀",
-                reply_markup=close_key,
-            )
-            return await query.message.reply_photo(
-                photo=img,
-                caption=f"**➻ sᴛᴀʀᴛᴇᴅ sᴛʀᴇᴀᴍɪɴɢ**\n\n‣ **ᴛɪᴛʟᴇ :** [{title[:27]}](https://t.me/{BOT_USERNAME}?start=info_{videoid})\n‣ **ᴅᴜʀᴀᴛɪᴏɴ :** `{duration}` ᴍɪɴᴜᴛᴇs\n‣ **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ :** {req_by}",
-                reply_markup=buttons,
-            )
-
 
 @app.on_callback_query(filters.regex("unban_ass"))
 async def unban_ass(_, CallbackQuery):
@@ -178,24 +145,6 @@ async def unban_ass(_, CallbackQuery):
             show_alert=True,
         )
 
-
-@app.on_callback_query(filters.regex("Stenzle_help"))
-async def help_menu(_, query: CallbackQuery):
-    try:
-        await query.answer()
-    except:
-        pass
-
-    try:
-        await query.edit_message_text(
-            text=f"๏ ʜᴇʏ {query.from_user.first_name}, 🥀\n\nᴘʟᴇᴀsᴇ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ғᴏʀ ᴡʜɪᴄʜ ʏᴏᴜ ᴡᴀɴɴᴀ ɢᴇᴛ ʜᴇʟᴘ.",
-            reply_markup=InlineKeyboardMarkup(helpmenu),
-        )
-    except Exception as e:
-        LOGGER.error(e)
-        return
-
-
 @app.on_callback_query(filters.regex("Stenzle_cb"))
 async def open_hmenu(_, query: CallbackQuery):
     callback_data = query.data.strip()
@@ -206,28 +155,11 @@ async def open_hmenu(_, query: CallbackQuery):
         await query.answer()
     except:
         pass
-
-    if cb == "help":
-        await query.edit_message_text(HELP_TEXT, reply_markup=keyboard)
-    elif cb == "sudo":
-        await query.edit_message_text(HELP_SUDO, reply_markup=keyboard)
-    elif cb == "owner":
-        await query.edit_message_text(HELP_DEV, reply_markup=keyboard)
-
-
+        
 @app.on_callback_query(filters.regex("Stenzle_home"))
 async def home_Stenzle(_, query: CallbackQuery):
     try:
         await query.answer()
     except:
         pass
-    try:
-        await query.edit_message_text(
-            text=PM_START_TEXT.format(
-                query.from_user.first_name,
-                BOT_MENTION,
-            ),
-            reply_markup=InlineKeyboardMarkup(pm_buttons),
-        )
-    except:
-        pass
+   
